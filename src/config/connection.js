@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/student-api", {
+mongoose.connect("mongodb+srv://root:root@cluster0.nhnxg.mongodb.net/rps-offers", {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
