@@ -8,7 +8,7 @@ const path = require('path');
 
 require('dotenv-flow').config({
   path: path.join(__dirname, '../../env'),
-  node_env: process.env.NODE_ENV || 'production'
+  node_env: process.env.NODE_ENV || 'development'
 });
 
 // require('dotenv-flow').config({
@@ -19,6 +19,8 @@ require('dotenv-flow').config({
 module.exports = {
   env: process.env.NODE_ENV,
   port:process.env.PORT,
+  jwtSecret: process.env.JWT_SECRET,
+  jwtExpirationInterval: process.env.JWT_EXPIRATION_MINUTES,
   mongo: {
     uri:process.env.MONGO_URI,
   },
