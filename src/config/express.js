@@ -51,7 +51,7 @@ app.use(passport.initialize());
 
 // app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDoc))
 app.get('/',(req,res)=>{
-    res.send("Node Js First Heroku App running")
+    res.send("Node js first heroku app running")
 })
 
 
