@@ -16,4 +16,6 @@ app.listen(port, (req, res) => {
     console.log(`Connection is start up on ${port} ${env}`);
 })
 
+socket = io.listen(process.env.PORT)
+
 module.exports = app;
