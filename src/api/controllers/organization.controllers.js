@@ -42,7 +42,6 @@ async function updateOne(req, res) {
         var id = req.params.id;
         var body = req.body;
         var result = await organizationService.updateOne(id, body)
-        // return result;
         res.status(201).json(result)
     } catch (e) {
         res.status(500).json(e);
