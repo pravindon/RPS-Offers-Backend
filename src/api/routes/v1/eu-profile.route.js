@@ -1,6 +1,5 @@
 const express = require('express');
 const euProfileController = require('../../controllers/eu-profile.controllers');
-
 const router = express.Router();
 
 router.get('/', euProfileController.getAll);
