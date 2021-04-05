@@ -4,6 +4,8 @@ const schema = mongoose.Schema;
 
 const saSampleProductSchema = new schema ({
     productName : { type : String},
+    brandName : { type : String },
+    productImage : { type : String },
     description : { type : String},
     createdDate: { type: Date, default: Date.now },
     updatedDate: { type: Date, default: Date.now }
