@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const schema = mongoose.Schema;
-const bcrypt = require('bcryptjs');
+// const bcrypt = require('bcryptjs');
 
 const euProfileShcema = new schema ({
-    fullName : {type : String, required : true},
-    emailId: {type : String},
+    name : {type : String, required : true},
+    email: {type : String},
     mobileNo: {type : Number, required : true},
     password: {type : String},
     gender: {type : String},
@@ -20,11 +20,11 @@ const euProfileShcema = new schema ({
     updatedDate: { type: Date, default: Date.now }
 })
 
-euProfileShcema.pre("save", async function(next) {
-    if(this.isModified("password")) {
-        this.password = await bcrypt.hash(this.password, 10);
-    }
-    next();
-})
+// euProfileShcema.pre("save", async function(next) {
+//     if(this.isModified("password")) {
+//         this.password = await bcrypt.hash(this.password, 10);
+//     }
+//     next();
+// })
 
 module.exports = mongoose.model('euProfile', euProfileShcema);
