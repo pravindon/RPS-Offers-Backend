@@ -1,9 +1,9 @@
 const router = require('express').Router();
 // const User = require('../../models/user.model');
-const User = require('../../models/eu-profile.model');
-const { registrationValidate, loginValidate} = require('../../../config/auth-validations');
+const User = require('../models/organization.model');
+const { registrationValidate, loginValidate} = require('../validation/admin-auth-validations');
 const jwt = require('jsonwebtoken');
-const bcript = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 router.post('/register', async (req, res) =>{
 
@@ -16,24 +16,32 @@ router.post('/register', async (req, res) =>{
     if(emailExist) return res.status(400).send('Email already exists')
 
     //Hash the password
-    const salt = await bcript.genSalt(10);
-    const hashPassword = await bcript.hash(req.body.password, salt);
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(req.body.password, salt);
 
     const user = new User({
-        name : req.body.name,
-        email : req.body.email,
+        cardNo: req.body.cardNo,
+        orgnaziationName : req.body.orgnaziationName,
+        adminName : req.body.adminName,
+        email: req.body.email,
         password : hashPassword,
-        mobileNo: req.body.mobileNo,
-        gender: req.body.gender,
-        address: req.body.address,
-        city: req.body.city,
-        landmark: req.body.landmark,
-        state: req.body.state,
-        country: req.body.country,
-        pinCode: req.body.pinCode,
-        userProfile : req.body.userProfile,
-        createdDate: req.body.createdDate,
-        updatedDate: req.body.updatedDate
+        confirmPassword : req.body.confirmPassword,
+        mobileNo : req.body.mobileNo,
+        mobileNoAlternate : req.body.mobileNoAlternate,
+        dateOfBirth : req.body.dateOfBirth,
+        localAddress : req.body.localAddress,
+        permanentAddress : req.body.permanentAddress,
+        city : req.body.city,
+        district : req.body.district,
+        state : req.body.state,
+        country : req.body.country,
+        pinCode : req.body.pinCode,
+        firmType : req.body.firmType,
+        description : req.body.description,
+        gender : req.body.gender,
+        firmLogo : req.body.firmLogo,
+        createdDate:req.body.createdDate,
+        updatedDate:req.body.updatedDate
     });
 
     try {
@@ -54,7 +62,7 @@ router.post('/login', async (req, res) => {
     if(!user) return res.status(400).send('Email or password is wrong')
 
     //Check password 
-    const validPass = await bcript.compare(req.body.password, user.password);
+    const validPass = await bcrypt.compare(req.body.password, user.password);
     if(!validPass) return res.status(400).send('Email or password is wrong');
 
     //Create and assign a token
