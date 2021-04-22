@@ -18,15 +18,15 @@ router.use('/students', studentRoutes);
 // Super Admin Section
 router.use('/organization', orgRoute);
 router.use('/saSampleProduct', saSampleProductRoutes);
+router.use('/user/superadmin', superAdminAuthRoutes);
 
 /// Admin Section
 router.use('/postOffers', adminPostOffer);
+router.use('/admin', adminAuthRoutes);
 
 // End User Section
 router.use('/euProfile', euProfileRoutes);
 router.use('/user', userAuthRoutes);
-router.use('/admin', adminAuthRoutes);
-router.use('/superadmin', superAdminAuthRoutes);
 router.use('/post', postRoutes)
 
 module.exports = router;

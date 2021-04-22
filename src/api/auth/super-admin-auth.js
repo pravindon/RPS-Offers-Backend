@@ -4,6 +4,7 @@ const User = require('../models/user.model');
 const { registrationValidate, loginValidate} = require('../validation/super-admin-auth-validations');
 const jwt = require('jsonwebtoken');
 const bcript = require('bcryptjs');
+var randtoken = require('rand-token');
 
 router.post('/register', async (req, res) =>{
 
@@ -48,8 +49,9 @@ router.post('/login', async (req, res) => {
     if(!validPass) return res.status(400).send('Email or password is wrong');
 
     //Create and assign a token
-    const token = jwt.sign({_id: user._id}, process.env.TOEKN_SECRET);
-    res.header('auth-token', token).send(token);
+    const payload = { email: user.email, _id: user._id };
+    const token = jwt.sign(payload, process.env.TOEKN_SECRET);
+    res.header('access_token', token).send({'access_token': token, 'refresh_token': randtoken.generate(16)});
 })
 
 module.exports = router

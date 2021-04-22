@@ -3,7 +3,7 @@ const euProfileController = require('../../controllers/eu-profile.controllers');
 const router = express.Router();
 const verify = require('../../../config/verifyToken');
 
-router.get('/', verify, euProfileController.getAll);
+router.get('/', euProfileController.getAll);
 router.post('/', euProfileController.create);
 router.get('/:id', euProfileController.getById);
 router.put('/:id', euProfileController.updateOne);
